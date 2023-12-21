@@ -2,20 +2,11 @@
 #define AUTHORIZATION_H
 
 #include <QMainWindow>
-
-#include <QtSql>
-#include <QSqlDatabase>
-#include <QCryptographicHash>
-#include <QTextBrowser>
-#include <QLabel>
-
-
 #include <QMessageBox>
 #include <QString>
 #include <QCloseEvent>
 #include "databasework.h"
 #include "mainwindow.h"
-#include "dayofweek.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class Authorization;

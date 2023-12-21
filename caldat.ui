@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>426</width>
-    <height>262</height>
+    <width>434</width>
+    <height>265</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,6 +16,11 @@
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <widget class="QGroupBox" name="groupBox">
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
      <property name="title">
       <string>Калькулятор дат</string>
      </property>

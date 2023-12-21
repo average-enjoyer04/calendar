@@ -6,7 +6,7 @@ Authorization::Authorization(QWidget *parent)
     , ui(new Ui::Authorization)
 {
     ui->setupUi(this);
-    setWindowTitle("Вход в систему");
+    setWindowTitle("calendar. Авторизация");
     ui->login->setPlaceholderText("Введите логин");
     ui->password->setPlaceholderText("Введите пароль");
     ui->login->setClearButtonEnabled(true);
@@ -85,16 +85,18 @@ void Authorization::on_registration_clicked()
 
 void Authorization::closeEvent(QCloseEvent *event)
 {
-    switch( QMessageBox::information(this,tr("Выход из приложения"),tr("Вы уверены, что хотите выйти из программы?"),tr("OK"), tr("Отменить"),0,1))
+    switch(QMessageBox::information(this, "Выход из приложения", "Вы уверены, что хотите выйти из программы?", QMessageBox::StandardButtons(QMessageBox::Ok | QMessageBox::Cancel)))
     {
-    case 0:
-        event->accept();
-        qApp->quit();
-        break;
-    case 1:
-    default:
-        event->ignore();
-        break;
+        case QMessageBox::Ok:
+            event->accept();
+            qApp->quit();
+            break;
+        case QMessageBox::Cancel:
+            event->ignore();
+            break;
+        default:
+            event->ignore();
+            break;
     }
 }
 

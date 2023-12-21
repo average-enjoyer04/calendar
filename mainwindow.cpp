@@ -6,7 +6,7 @@ MainWindow::MainWindow(DatabaseWork* dbData, QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle("Главное меню");
+    setWindowTitle("calendar. Главное меню");
     this->dbData = dbData;
 }
 
@@ -77,5 +77,12 @@ void MainWindow::on_caldat_clicked()
     //hide();
     window = new CalDat(this);
     window->show();
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    Authorization* main = static_cast<Authorization*>(parent());
+    QWidget::closeEvent(event);
+    main->show();
 }
 

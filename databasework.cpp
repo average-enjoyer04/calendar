@@ -4,7 +4,7 @@ DatabaseWork::DatabaseWork()
 {
     QSqlDatabase::removeDatabase("qt_sql_default_connection");
     QDir databasePath;
-    QString path = databasePath.currentPath()+"/myDb10.db"; // Not "myDb.db"
+    QString path = databasePath.currentPath()+"/myDb10.db";
     db = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
     db->setDatabaseName(path);
     if(db->open()){
@@ -33,9 +33,8 @@ DatabaseWork::~DatabaseWork()
 }
 
 void DatabaseWork::hashMake(QString& username, QString& password, QString& result){
-    QByteArray salt = QCryptographicHash::hash(username.toUtf8(), QCryptographicHash::Md5); // Generate salt using username hash
-    QByteArray saltedPassword = password.toUtf8() + salt; // Append salt to password
-
+    QByteArray salt = QCryptographicHash::hash(username.toUtf8(), QCryptographicHash::Md5); // генерируем соль
+    QByteArray saltedPassword = password.toUtf8() + salt; // добавляем соль
     QByteArray hashedPassword = QCryptographicHash::hash(saltedPassword, QCryptographicHash::Sha512);
     result = hashedPassword.toHex();
 }
@@ -55,10 +54,8 @@ QString DatabaseWork::authorization(QString& username, QString& password){
         else {
             if(query.next()){
                 userId = query.value(0).toInt();
-                qDebug()<<userId;
                 return "Вы авторизовались";
             }
-
             else{
                 return "Непраильный пароль или логин";
             }

@@ -1,32 +1,28 @@
-#include "yearcal.h"
-#include "ui_yearcal.h"
+#include "calyear.h"
+#include "ui_calyear.h"
 
-YearCal::YearCal(DatabaseWork* dbData, QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::YearCal)
+CalYear::CalYear(DatabaseWork* dbData, QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::CalYear)
 {
     ui->setupUi(this);
-    setWindowTitle("calendar. Календарь на год");
     this->dbData = dbData;
-    ui->month->setPlaceholderText("1...12");
 }
 
-YearCal::~YearCal()
+CalYear::~CalYear()
 {
     delete widget;
     delete ui;
 }
 
-void YearCal::on_back_clicked()
+void CalYear::on_back_clicked()
 {
     this->close();
     MainWindow* main = static_cast<MainWindow*>(parent());
-    //delete this;
-    delete widget;
-    widget = nullptr;
+
     main->show();
 }
-QString YearCal::daysColor(int month, std::set<int>& dates){
+QString CalYear::daysColor(int month, std::set<int>& dates){
     int days;
     int dayNum = dayNumber(1, month+1, year);;
     days = numberOfDays(month+1, year);
@@ -37,8 +33,8 @@ QString YearCal::daysColor(int month, std::set<int>& dates){
     QString monthName = getMonthName(month+1);
     int padding = (35 - monthName.length()) / 2;
     QString centeredMonthName = QString("%1%2%3").arg(" ", padding, ' ').arg(monthName).arg(" ", padding, ' ');
-    QString text = "<pre><font size=\"3\">";
-    text += "<strong>" + centeredMonthName + "</strong>";
+    QString text = "<pre>";
+    text += centeredMonthName;
     text += "<font color=\"blue\">\n   Пн   Вт   Ср   Чт   Пт   Сб   Вс\n</font>";
     int k;
     for (k = 0; k < dayNum; k++)
@@ -49,7 +45,7 @@ QString YearCal::daysColor(int month, std::set<int>& dates){
     for (int j = 1; j <= days; j++)
     {
         if (dates.count(j)) {
-            text += QString("<font color=\"green\"><strong><b>%1</b><strong></font>").arg(j, 5);
+            text += QString("<font color=\"yellow\">%1</font>").arg(j, 5);
         }
         else if (k == 5 || k == 6)
         {
@@ -65,10 +61,9 @@ QString YearCal::daysColor(int month, std::set<int>& dates){
         }
 
     }
-    text += "<\font>";
     return text;
 }
-QString YearCal::daysinMonth(int month){
+QString CalYear::daysinMonth(int month){
     int days;
     int dayNum = dayNumber(1, month+1, year);;
     days = numberOfDays(month+1, year);
@@ -77,10 +72,10 @@ QString YearCal::daysinMonth(int month){
     }
     dayNum-=1;
     QString monthName = getMonthName(month+1);
-    int padding = (34 - monthName.length()) / 2;
+    int padding = (35 - monthName.length()) / 2;
     QString centeredMonthName = QString("%1%2%3").arg(" ", padding, ' ').arg(monthName).arg(" ", padding, ' ');
-    QString text = "<pre><font size=\"3\">";
-    text += "<strong>" + centeredMonthName + "</strong>";
+    QString text = "<pre>";
+    text += centeredMonthName;
     text += "<font color=\"blue\">\n   Пн   Вт   Ср   Чт   Пт   Сб   Вс\n</font>";
     int k;
     for (k = 0; k < dayNum; k++)
@@ -104,10 +99,9 @@ QString YearCal::daysinMonth(int month){
         }
 
     }
-    text += "<\font>";
     return text;
 }
-void YearCal::on_calOut_clicked()
+void CalYear::on_calOut_clicked()
 {
     if (widget != nullptr){
         delete widget;  // Удаление существующего объекта dbData
@@ -121,34 +115,31 @@ void YearCal::on_calOut_clicked()
             widget->setMinimumWidth(1150);
             widget->setMinimumHeight(450);
             n = 4;
-            ui->checkBox4->setChecked(false);
         }
         else if (ui->checkBox6->isChecked()) {
             widget->setMinimumWidth(1700);
             widget->setMinimumHeight(275);
             n = 6;
-            ui->checkBox6->setChecked(false);
         }
         else {
             widget->setMinimumWidth(850);
             widget->setMinimumHeight(550);
             n = 3;
-            ui->checkBox3->setChecked(false);
         }
         QGridLayout *layout = new QGridLayout(widget);
         QString text;
         int j = 0, k = 0;
-        if (!ui->checkBox->isChecked()){
-        for (int i = 0; i < 12; i++){
-            text = daysinMonth(i);
-            QLabel *label =  new QLabel(text);
-            layout->addWidget(label,k,j);
-            j++;
-            if (j == n){
-                k++;
-                j = 0;
-            }
-        }}
+        if (ui->checkBox4->isChecked()){
+            for (int i = 0; i < 12; i++){
+                text = daysinMonth(i);
+                QLabel *label =  new QLabel(text);
+                layout->addWidget(label,k,j);
+                j++;
+                if (j == n){
+                    k++;
+                    j = 0;
+                }
+            }}
         else {
             for (int i = 0; i < 12; i++){
                 if (!(dbData->datesArray[i].empty())) {
@@ -173,9 +164,9 @@ void YearCal::on_calOut_clicked()
         QMessageBox::warning(this, "Некорректный ввод", "Год долже быть в промежутке от 1598 до 4092.");
     }
 }
-bool YearCal::checkInput(int day, int month){
+bool CalYear::checkInput(int day, int month){
     if (month == 0 || day == 0) { // Проверка на пустые поля
-        QMessageBox::warning(this, "Некорректный ввод", "Пожалуйста, заполните поля корректно.");
+        QMessageBox::warning(this, "Некорректный ввод", "Пожалуйста, заполните все поля.");
         return false;
     }
     else if (month<=0 || month>12) { // Проверка на правильность ввода month
@@ -190,7 +181,7 @@ bool YearCal::checkInput(int day, int month){
         return true;
     }
 }
-void YearCal::on_checkEvent_clicked()
+void CalYear::on_checkEvent_clicked()
 {
     int day = ui->day->text().toInt();
     int month = ui->month->text().toInt();
@@ -207,4 +198,3 @@ void YearCal::on_checkEvent_clicked()
         ui->month->clear();
     }
 }
-

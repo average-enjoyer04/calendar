@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QCloseEvent>
 #include "databasework.h"
 #include "dayofweek.h"
 #include "dayevent.h"
@@ -39,6 +40,7 @@ private:
     Ui::MainWindow *ui;
     DatabaseWork* dbData;
     QWidget* window = nullptr;
+    void closeEvent(QCloseEvent *event);
 };
 
 #endif // MAINWINDOW_H

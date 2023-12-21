@@ -6,6 +6,7 @@ MonthCal::MonthCal(DatabaseWork* dbData, QWidget *parent)
     , ui(new Ui::MonthCal)
 {
     ui->setupUi(this);
+    setWindowTitle("calendar. Календарь на месяц");
     this->dbData = dbData;
     ui->month->setPlaceholderText("Введите номер месяца");
 }
@@ -110,8 +111,6 @@ void MonthCal::on_choose_clicked()
     int year;
     year = ui->year->text().toInt();//
     month = ui->month->text().toInt();
-    qDebug()<<month;
-    qDebug()<<year;
     if (checkInput(month, year)) {
         int dayNum;
         int days;
@@ -122,7 +121,6 @@ void MonthCal::on_choose_clicked()
         ui->tableWidget->verticalHeader()->setVisible(false); // Убрать номера строк сбоку
         QStringList daysOfWeek = {"Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"};
         ui->tableWidget->setHorizontalHeaderLabels(daysOfWeek);
-        ui->tableWidget->horizontalHeader()->setStyleSheet("background-color: lightblue;");
         dayNum = dayNumber(1, month, year);
         days = numberOfDays(month, year);
         if (dayNum==0){

@@ -6,7 +6,7 @@ CalDat::CalDat(QWidget *parent)
     , ui(new Ui::CalDat)
 {
     ui->setupUi(this);
-    setWindowTitle("Калькулятор дат");
+    setWindowTitle("calendar. Калькулятор дат");
 }
 
 CalDat::~CalDat()

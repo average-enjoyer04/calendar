@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>445</width>
-    <height>369</height>
+    <height>372</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,12 +17,24 @@
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <widget class="QGroupBox" name="groupBox">
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="title">
        <string>Главное меню</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QPushButton" name="dayofWeek">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Узнать день недели</string>
          </property>
@@ -30,6 +42,12 @@
        </item>
        <item>
         <widget class="QPushButton" name="dayEvent">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Памятные даты</string>
          </property>
@@ -37,6 +55,12 @@
        </item>
        <item>
         <widget class="QPushButton" name="calMonth">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Календарь на месяц</string>
          </property>
@@ -44,6 +68,12 @@
        </item>
        <item>
         <widget class="QPushButton" name="calYear">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Календарь на год</string>
          </property>
@@ -51,6 +81,12 @@
        </item>
        <item>
         <widget class="QPushButton" name="caldat">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Калькулятор дат</string>
          </property>
@@ -61,6 +97,11 @@
     </item>
     <item>
      <widget class="QPushButton" name="exit">
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>Выйти</string>
       </property>

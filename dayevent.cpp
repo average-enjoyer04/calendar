@@ -6,7 +6,7 @@ DayEvent::DayEvent(DatabaseWork* dbData, QWidget *parent)
     , ui(new Ui::DayEvent)
 {
     ui->setupUi(this);
-    setWindowTitle("Особые дни");
+    setWindowTitle("calendar. Особые дни");
     this->dbData = dbData;
 }
 

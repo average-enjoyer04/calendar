@@ -6,7 +6,7 @@ DayofWeek::DayofWeek(QWidget *parent)
     , ui(new Ui::DayofWeek)
 {
     ui->setupUi(this);
-    setWindowTitle("Поиск дня недели");
+    setWindowTitle("calendar. Поиск дня недели");
 }
 
 DayofWeek::~DayofWeek()
@@ -15,7 +15,7 @@ DayofWeek::~DayofWeek()
 }
 bool DayofWeek::checkInput(int day, int month, int year){
     if (day == 0 || month == 0 || year == 0) { // Проверка на пустые поля
-        QMessageBox::warning(this, "Некорректный ввод", "Пожалуйста, заполните все поля.");
+        QMessageBox::warning(this, "Некорректный ввод", "Пожалуйста, заполните поля корректно.");
         return false;
     }
     else if (year <= 1598 || year > 4092) { // Проверка на пустые поля
